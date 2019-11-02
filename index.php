@@ -11,38 +11,18 @@
 </head>
 
 <?php
-
-// // Product Class
-// class Product
-// {
-//     public static $products_list = ['Hey'];
-//     var $product_name;
-//     var $product_price;
-//     var $product_weight;
-//     var $product_id;
-
-//     // Product Constructor
-
-//     public function __construct($a_name, $a_price, $a_weight, $a_id)
-//     {
-//         $this->product_name = $a_name;
-//         $this->product_price = $a_price;
-//         $this->product_weight = $a_weight;
-//         $this->product_id = $a_id;
-//         Product::$products_list[] = $this;
-//     }
-// }
-
-// // Products
-// $rice = new Product("Rice", 10, 10000, 001);
-// $chocolate = new Product("Chocolate", 0.50, 45, 002);
-// $jelly = new Product("Jelly", 1.20, 60, 003);
-// $strawberries = new Product("Strawberries", 2.50, 200, 004);
-// $water_bottle = new Product("Water Bottle", 1, 150, 005);
-// var_dump($products_list);
-
+// Products
 $products_file_contents = file_get_contents("products.json");
 $products_array = json_decode($products_file_contents, true);
+
+// Unique Products Array
+
+$product_types_array = array_column($products_array, 'type'); // Getting only product types
+$product_types = array_unique($product_types_array); // Removing duplicates
+
+// Search
+
+// if ($_POST['search']) { }
 ?>
 
 <body>
@@ -50,12 +30,25 @@ $products_array = json_decode($products_file_contents, true);
         <h1 class="page-header">Shop</h1>
     </div>
     <div class="main">
+        <div class="filter-wrapper">
+            <h2>Search and Filter</h2>
+            <form action="index.php" method="POST">
+                <input type="hidden" value="1" name="search">
+                <input class="input search" name="keyword" type="text" placeholder="Search for an item">
+                <select name="product-type">
+                    <?php foreach ($product_types as $product_type) { ?>
+                        <option value="<?= $product_type; ?>"><?= $product_type; ?></option>
+                    <?php } ?>
+                </select>
+                <button class="main-button" type="submit">Search</button>
+            </form>
+        </div>
         <div class="intro">
             <h2 class="intro-header">Items</h2>
         </div>
         <div class="product-list">
             <?php foreach ($products_array as $product) { ?>
-                <div class="product-wrapper">
+                <a class="product-wrapper" href="#">
                     <h2 class="product-name"><?= $product['name']; ?></h2>
                     <p class="product-price"><strong>Price:</strong> £<?= number_format((float) $product['price'], 2, '.', ''); ?></p>
                     <p class="product-weight"> <strong>Weight: </strong>
@@ -67,7 +60,7 @@ $products_array = json_decode($products_file_contents, true);
                     </p>
                     <p class="product-id"><strong>Product ID:</strong> <?= $product['id']; ?></p>
                     <p class="product-type"><?= $product['type']; ?></p>
-                </div>
+                </a>
             <?php } ?>
             <?php  ?>
         </div>

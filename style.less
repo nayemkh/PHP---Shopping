@@ -1,5 +1,53 @@
 @import "global.less";
 
+/* Main Styles */
+
+* {
+  box-sizing: border-box;
+}
+
+// Form Elements
+
+form {
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+  .input,
+  select {
+    vertical-align: top;
+    display: inline-block;
+    max-width: 250px;
+    height: 50px;
+    font-size: 20px;
+    outline: 0;
+    border: 2px solid @blue_1;
+    border-width: 0 0 2px 0;
+    padding: 0;
+  }
+}
+
+// Buttons
+
+.main-button {
+  display: inline-block;
+  color: @blue_1;
+  font-size: 22px;
+  height: 50px;
+  border: 2px solid @blue_1;
+  background: white;
+  transition: all 220ms ease-in-out;
+  &:hover,
+  &:focus,
+  &:active {
+    cursor: pointer;
+    background: @blue_1;
+    color: white;
+  }
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   margin: 0;
@@ -15,6 +63,14 @@ body {
   .main {
     background: @grey_1;
     padding: 30px;
+    a {
+      text-decoration: none;
+    }
+    .filter-wrapper {
+      text-align: center;
+      form {
+      }
+    }
     .intro {
       .intro-header {
         text-align: center;
@@ -24,6 +80,7 @@ body {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       .product-wrapper {
+        display: block;
         position: relative;
         background: white;
         padding: 15px;
@@ -31,6 +88,14 @@ body {
         margin: 10px;
         border: 2px solid @blue_1;
         color: @blue_1;
+        transition: all 220ms ease-in-out;
+        &:hover,
+        &:focus,
+        &:active {
+          background: @blue_1;
+          color: white;
+          transform: scale(1.05);
+        }
         .product-name {
           font-size: 30px;
           text-align: center;
