@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Rice",
+    "price": 10.0,
+    "weight": 10000,
+    "id": "001",
+    "type": "Food"
+  },
+  {
+    "name": "Chocolate",
+    "price": 1.5,
+    "weight": 45,
+    "id": "002",
+    "type": "Food"
+  },
+  {
+    "name": "Jelly",
+    "price": 1.2,
+    "weight": 60,
+    "id": "003",
+    "type": "Food"
+  },
+  {
+    "name": "Strawberries",
+    "price": 2.5,
+    "weight": 200,
+    "id": "004",
+    "type": "Food"
+  },
+  {
+    "name": "Water (750ml)",
+    "price": 1.0,
+    "weight": 750,
+    "id": "005",
+    "type": "Food"
+  },
+  {
+    "name": "Pineapple",
+    "price": 6.0,
+    "weight": 500,
+    "id": "006",
+    "type": "Food"
+  },
+  {
+    "name": "Watermelon",
+    "price": 12.0,
+    "weight": 1000,
+    "id": "007",
+    "type": "Food"
+  },
+  {
+    "name": "Wooden Plank",
+    "price": 12,
+    "weight": 1200,
+    "id": "007",
+    "type": "Material"
+  },
+  {
+    "name": "Fire Door",
+    "price": 250,
+    "weight": 45000,
+    "id": "008",
+    "type": "Hardware"
+  },
+  {
+    "name": "Roof Tile",
+    "price": 10,
+    "weight": 500,
+    "id": "009",
+    "type": "Material"
+  },
+  {
+    "name": "7cm Nails",
+    "price": 3.5,
+    "weight": 50,
+    "id": "010",
+    "type": "Hardware"
+  },
+  {
+    "name": "5 Seater Sofa",
+    "price": 45000,
+    "weight": 100000,
+    "id": "011",
+    "type": "Furniture"
+  }
+]

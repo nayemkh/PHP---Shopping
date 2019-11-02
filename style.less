@@ -1,0 +1,58 @@
+@import "global.less";
+
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  .header-wrapper {
+    background-color: @blue_1;
+    padding: 40px 0;
+    text-align: center;
+    .page-header {
+      color: white;
+      font-size: 80px;
+    }
+  }
+  .main {
+    background: @grey_1;
+    padding: 30px;
+    .intro {
+      .intro-header {
+        text-align: center;
+      }
+    }
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      .product-wrapper {
+        position: relative;
+        background: white;
+        padding: 15px;
+        border-radius: 7px;
+        margin: 10px;
+        border: 2px solid @blue_1;
+        color: @blue_1;
+        .product-name {
+          font-size: 30px;
+          text-align: center;
+        }
+        .product-price {
+        }
+        .product-weight {
+        }
+        .product-id {
+        }
+        .product-type {
+          position: absolute;
+          top: 0;
+          left: 0;
+          padding: 5px;
+          margin: 0;
+          color: white;
+          background: rgba(0, 0, 0, 0.5);
+          border-top-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+      }
+    }
+  }
+}
