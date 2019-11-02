@@ -52,35 +52,35 @@
     "name": "Wooden Plank",
     "price": 12,
     "weight": 1200,
-    "id": "007",
+    "id": "008",
     "type": "Material"
   },
   {
     "name": "Fire Door",
     "price": 250,
     "weight": 45000,
-    "id": "008",
+    "id": "009",
     "type": "Hardware"
   },
   {
     "name": "Roof Tile",
     "price": 10,
     "weight": 500,
-    "id": "009",
+    "id": "010",
     "type": "Material"
   },
   {
     "name": "7cm Nails",
     "price": 3.5,
     "weight": 50,
-    "id": "010",
+    "id": "011",
     "type": "Hardware"
   },
   {
     "name": "5 Seater Sofa",
     "price": 45000,
     "weight": 100000,
-    "id": "011",
+    "id": "012",
     "type": "Furniture"
   }
 ]

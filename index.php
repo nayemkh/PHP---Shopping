@@ -22,7 +22,15 @@ $product_types = array_unique($product_types_array); // Removing duplicates
 
 // Search
 
-// if ($_POST['search']) { }
+if ($_POST['search']) {
+    // Product Type Filter
+    if (htmlentities($_POST['product-type'])) {
+        $products_array = array_filter($products_array, function ($product) { // Filtering products array
+            return $product['type'] == htmlentities($_POST['product-type']); // Return products with the same type
+        });
+    }
+}
+
 ?>
 
 <body>
@@ -36,13 +44,21 @@ $product_types = array_unique($product_types_array); // Removing duplicates
                 <input type="hidden" value="1" name="search">
                 <input class="input search" name="keyword" type="text" placeholder="Search for an item">
                 <select name="product-type">
-                    <?php foreach ($product_types as $product_type) { ?>
-                        <option value="<?= $product_type; ?>"><?= $product_type; ?></option>
-                    <?php } ?>
-                </select>
-                <button class="main-button" type="submit">Search</button>
+                    <option value="">Select a product type</option>
+                    <?php
+                    foreach ($product_types as $product_type) { ?>
+                        <option value="<?= $product_type; ?>" <?php if (htmlentities($_POST['product-type']) == $product_type) { ?> selected <?php } ?>><?= $product_type; ?></option> <?php } ?>
+                </select> <button class="main-button" type="submit">Search</button>
             </form>
         </div>
+        <?php if ($_POST['search'] && htmlentities($_POST['product-type'])) { ?>
+            <div class="active-filters-wrapper">
+                <?php if (htmlentities($_POST['product-type'])) { ?>
+                    <p>Filters:</p>
+                    <span><?= htmlentities($_POST['product-type']) ?></span>
+                <?php } ?>
+            </div>
+        <?php } ?>
         <div class="intro">
             <h2 class="intro-header">Items</h2>
         </div>
