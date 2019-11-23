@@ -93,12 +93,12 @@ body {
       .product-wrapper {
         display: block;
         position: relative;
-        background: white;
+        background: @blue_1;
         padding: 15px;
         border-radius: 7px;
         margin: 10px;
-        border: 2px solid @blue_1;
-        color: @blue_1;
+        border: 2px solid white;
+        color: white;
         transition: all 220ms ease-in-out;
         &:after {
           transition: all 220ms, ease-in-out;
@@ -111,7 +111,7 @@ body {
           left: 0;
           padding: 8px;
           margin: 0;
-          color: @blue_1;
+          color: white;
           border-top-left-radius: 5px;
           border-bottom-right-radius: 5px;
         }
@@ -138,12 +138,7 @@ body {
         &:hover,
         &:focus,
         &:active {
-          background: @blue_1;
-          color: white;
           transform: scale(1.05);
-          &:after {
-            color: white;
-          }
         }
         .product-name {
           font-size: 30px;
