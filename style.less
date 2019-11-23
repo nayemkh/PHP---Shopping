@@ -100,12 +100,50 @@ body {
         border: 2px solid @blue_1;
         color: @blue_1;
         transition: all 220ms ease-in-out;
+        &:after {
+          transition: all 220ms, ease-in-out;
+          content: "";
+          font-family: "Font Awesome 5 Pro";
+          font-weight: 900;
+          position: absolute;
+          font-size: 20px;
+          top: 0;
+          left: 0;
+          padding: 8px;
+          margin: 0;
+          color: @blue_1;
+          border-top-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+        &.food {
+          &:after {
+            content: "\f805";
+          }
+        }
+        &.material {
+          &:after {
+            content: "\f466";
+          }
+        }
+        &.hardware {
+          &:after {
+            content: "\f6e3";
+          }
+        }
+        &.furniture {
+          &:after {
+            content: "\f4b8";
+          }
+        }
         &:hover,
         &:focus,
         &:active {
           background: @blue_1;
           color: white;
           transform: scale(1.05);
+          &:after {
+            color: white;
+          }
         }
         .product-name {
           font-size: 30px;
@@ -116,17 +154,6 @@ body {
         .product-weight {
         }
         .product-id {
-        }
-        .product-type {
-          position: absolute;
-          top: 0;
-          left: 0;
-          padding: 5px;
-          margin: 0;
-          color: white;
-          background: rgba(0, 0, 0, 0.5);
-          border-top-left-radius: 5px;
-          border-bottom-right-radius: 5px;
         }
       }
     }

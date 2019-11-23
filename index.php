@@ -8,6 +8,7 @@
     <title>Shop</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script data-search-pseudo-elements src="https://kit.fontawesome.com/25ad1fd958.js" crossorigin="anonymous"></script>
 </head>
 
 <?php
@@ -22,7 +23,7 @@ $product_types = array_unique($product_types_array); // Removing duplicates
 
 // Search
 
-if ($_POST['search']) {
+if (isset($_POST['search'])) {
     // Product Type Filter
     if (htmlentities($_POST['product-type'])) {
         $products_array = array_filter($products_array, function ($product) { // Filtering products array
@@ -47,11 +48,12 @@ if ($_POST['search']) {
                     <option value="">Select a product type</option>
                     <?php
                     foreach ($product_types as $product_type) { ?>
-                        <option value="<?= $product_type; ?>" <?php if (htmlentities($_POST['product-type']) == $product_type) { ?> selected <?php } ?>><?= $product_type; ?></option> <?php } ?>
+                        <option value="<?= $product_type; ?>" <?php if (isset($_POST['product-type']) && htmlentities($_POST['product-type']) == $product_type) { ?> selected <?php } ?>><?= $product_type; ?></option>
+                    <?php } ?>
                 </select> <button class="main-button" type="submit">Search</button>
             </form>
         </div>
-        <?php if ($_POST['search'] && htmlentities($_POST['product-type'])) { ?>
+        <?php if (isset($_POST['search']) && htmlentities($_POST['product-type'])) { ?>
             <div class="active-filters-wrapper">
                 <?php if (htmlentities($_POST['product-type'])) { ?>
                     <p>Filters:</p>
@@ -64,7 +66,7 @@ if ($_POST['search']) {
         </div>
         <div class="product-list">
             <?php foreach ($products_array as $product) { ?>
-                <a class="product-wrapper" href="#">
+                <a class="product-wrapper <?= strtolower($product['type']); ?>" href="#">
                     <h2 class="product-name"><?= $product['name']; ?></h2>
                     <p class="product-price"><strong>Price:</strong> £<?= number_format((float) $product['price'], 2, '.', ''); ?></p>
                     <p class="product-weight"> <strong>Weight: </strong>
@@ -75,10 +77,8 @@ if ($_POST['search']) {
                             } ?>
                     </p>
                     <p class="product-id"><strong>Product ID:</strong> <?= $product['id']; ?></p>
-                    <p class="product-type"><?= $product['type']; ?></p>
                 </a>
             <?php } ?>
-            <?php  ?>
         </div>
     </div>
 </body>
