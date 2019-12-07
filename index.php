@@ -30,6 +30,24 @@ if (isset($_POST['search'])) {
             return $product['type'] == htmlentities($_POST['product-type']); // Return products with the same type
         });
     }
+    // Keyword Filter
+
+    $keyword = (htmlentities($_POST['keyword']));
+
+    if ($keyword) {
+        $names_array = array_column($products_array, 'name');  // Getting only product names
+        foreach ($names_array as $name) { // Looping through names
+            $match = stripos($name, $keyword); // Finding matches
+            if (is_numeric($match)) { // if stripos not false
+                $matches[] = $name; // Pushing matches into array
+            }
+        }
+        $products_array = array_filter($products_array, function ($product) use ($matches) { // Filtering products array
+            if (in_array($product['name'], $matches)) { // If product name is found in matches array
+                return $product; // Return product
+            }
+        });
+    }
 }
 
 ?>
