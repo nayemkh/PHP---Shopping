@@ -65,29 +65,29 @@ if (isset($_POST['search'])) {
     <div class="header-wrapper">
         <h1 class="page-header">Shop</h1>
     </div>
+    <div class="filter-wrapper">
+        <h2>Search and Filter</h2>
+        <form action="index.php" method="POST">
+            <input type="hidden" value="1" name="search">
+            <input class="input search" name="keyword" type="text" placeholder="Search for an item">
+            <select name="product-type">
+                <option value="">Select a product type</option>
+                <?php
+                foreach ($product_types as $product_type) { ?>
+                    <option value="<?= $product_type; ?>" <?php if (isset($_POST['product-type']) && htmlentities($_POST['product-type']) == $product_type) { ?> selected <?php } ?>><?= $product_type; ?></option>
+                <?php } ?>
+            </select>
+            <button class="main-button icon search" type="submit">Search</button>
+            <?php if (isset($_POST['search'])) { ?>
+                <button type="submit" name="clear-search" class="main-button icon clear">Clear Search</a>
+                <?php } ?>
+        </form>
+    </div>
     <div class="main">
-        <div class="filter-wrapper">
-            <h2>Search and Filter</h2>
-            <form action="index.php" method="POST">
-                <input type="hidden" value="1" name="search">
-                <input class="input search" name="keyword" type="text" placeholder="Search for an item">
-                <select name="product-type">
-                    <option value="">Select a product type</option>
-                    <?php
-                    foreach ($product_types as $product_type) { ?>
-                        <option value="<?= $product_type; ?>" <?php if (isset($_POST['product-type']) && htmlentities($_POST['product-type']) == $product_type) { ?> selected <?php } ?>><?= $product_type; ?></option>
-                    <?php } ?>
-                </select>
-                <button class="main-button icon search" type="submit">Search</button>
-                <?php if (isset($_POST['search'])) { ?>
-                    <button type="submit" name="clear-search" class="main-button icon clear">Clear Search</a>
-                    <?php } ?>
-            </form>
-        </div>
         <?php if (isset($_POST['search']) && htmlentities($_POST['product-type'])) { ?>
             <div class="active-filters-wrapper">
                 <?php if (htmlentities($_POST['product-type'])) { ?>
-                    <p>Filters:</p>
+                    <h3>Filters:</h3>
                     <span><?= htmlentities($_POST['product-type']) ?></span>
                 <?php } ?>
             </div>

@@ -30,6 +30,14 @@ form {
   }
 }
 
+// Text
+
+h2,
+h3,
+p {
+  margin: 15px 0;
+}
+
 // Buttons
 
 .main-button {
@@ -40,6 +48,7 @@ form {
   border: 2px solid @blue_1;
   background-color: @blue_1;
   transition: all 220ms ease-in-out;
+  margin-right: 10px;
   &:hover,
   &:focus,
   &:active {
@@ -87,23 +96,31 @@ body {
       font-size: 80px;
     }
   }
+  .filter-wrapper {
+    overflow: hidden;
+    text-align: center;
+    padding: 60px 0;
+    background-color: @pink_1;
+    h2 {
+      margin-top: 0;
+    }
+  }
   .main {
+    overflow: hidden;
     background: @grey_1;
     padding: 0 30px 30px 30px;
     a {
       text-decoration: none;
     }
-    .filter-wrapper {
-      text-align: center;
-      padding: 30px 0;
-    }
     .active-filters-wrapper {
+      padding: 20px 0;
       p {
         display: block;
         margin-top: 0;
         font-weight: 700;
       }
       span {
+        display: inline-block;
         font-weight: 700;
         background: @blue_1;
         color: white;
@@ -111,11 +128,13 @@ body {
       }
     }
     .intro {
+      padding: 20px 0;
       .intro-header {
         text-align: center;
       }
     }
     .status-message {
+      padding: 10px 0;
       p {
         display: block;
         text-align: center;
