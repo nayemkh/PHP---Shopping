@@ -26,6 +26,7 @@ form {
     border: 2px solid @blue_1;
     border-width: 0 0 2px 0;
     padding: 0;
+    margin-right: 10px;
   }
 }
 
@@ -37,14 +38,40 @@ form {
   font-size: 22px;
   height: 50px;
   border: 2px solid @blue_1;
-  background: @blue_1;
+  background-color: @blue_1;
   transition: all 220ms ease-in-out;
   &:hover,
   &:focus,
   &:active {
     cursor: pointer;
-    background: white;
+    background-color: white;
     color: @blue_1;
+  }
+  &.icon {
+    &:after {
+      font-family: "Font Awesome 5 Pro";
+      font-weight: 900;
+      font-size: 20px;
+    }
+  }
+  &.search {
+    &:after {
+      content: "\f002";
+      padding-left: 7px;
+    }
+  }
+  &.clear {
+    background-color: @red_1;
+    border-color: @red_1;
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: white;
+      color: @red_1;
+    }
+    &:after {
+      content: "\f0e2";
+    }
   }
 }
 
@@ -62,12 +89,13 @@ body {
   }
   .main {
     background: @grey_1;
-    padding: 30px;
+    padding: 0 30px 30px 30px;
     a {
       text-decoration: none;
     }
     .filter-wrapper {
       text-align: center;
+      padding: 30px 0;
     }
     .active-filters-wrapper {
       p {
@@ -85,6 +113,18 @@ body {
     .intro {
       .intro-header {
         text-align: center;
+      }
+    }
+    .status-message {
+      p {
+        display: block;
+        text-align: center;
+        background: @red_1;
+        font-size: 22px;
+        color: white;
+        padding: 10px;
+        margin-bottom: 0;
+        border-radius: 5px;
       }
     }
     .product-list {

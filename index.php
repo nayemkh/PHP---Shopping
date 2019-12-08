@@ -12,6 +12,13 @@
 </head>
 
 <?php
+
+// Clear Search
+
+if (isset($_POST['clear-search'])) {
+    $_POST = [];
+}
+
 // Products
 $products_file_contents = file_get_contents("products.json");
 $products_array = json_decode($products_file_contents, true);
@@ -42,11 +49,13 @@ if (isset($_POST['search'])) {
                 $matches[] = $name; // Pushing matches into array
             }
         }
-        $products_array = array_filter($products_array, function ($product) use ($matches) { // Filtering products array
-            if (in_array($product['name'], $matches)) { // If product name is found in matches array
-                return $product; // Return product
-            }
-        });
+        if (!empty($matches)) {
+            $products_array = array_filter($products_array, function ($product) use ($matches) { // Filtering products array
+                if (in_array($product['name'], $matches)) { // If product name is found in matches array
+                    return $product; // Return product
+                }
+            });
+        }
     }
 }
 
@@ -68,7 +77,11 @@ if (isset($_POST['search'])) {
                     foreach ($product_types as $product_type) { ?>
                         <option value="<?= $product_type; ?>" <?php if (isset($_POST['product-type']) && htmlentities($_POST['product-type']) == $product_type) { ?> selected <?php } ?>><?= $product_type; ?></option>
                     <?php } ?>
-                </select> <button class="main-button" type="submit">Search</button>
+                </select>
+                <button class="main-button icon search" type="submit">Search</button>
+                <?php if (isset($_POST['search'])) { ?>
+                    <button type="submit" name="clear-search" class="main-button icon clear">Clear Search</a>
+                    <?php } ?>
             </form>
         </div>
         <?php if (isset($_POST['search']) && htmlentities($_POST['product-type'])) { ?>
@@ -77,6 +90,11 @@ if (isset($_POST['search'])) {
                     <p>Filters:</p>
                     <span><?= htmlentities($_POST['product-type']) ?></span>
                 <?php } ?>
+            </div>
+        <?php } ?>
+        <?php if (isset($_POST['search']) && empty($matches) && $_POST['product-type'] == "") { ?>
+            <div class="status-message">
+                <p>Sorry, your search did not return any matches.</p>
             </div>
         <?php } ?>
         <div class="intro">
