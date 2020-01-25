@@ -38,6 +38,11 @@ p {
   margin: 15px 0;
 }
 
+h2 {
+  font-size: 28px;
+  color: @blue_3;
+}
+
 // Buttons
 
 .main-button {
@@ -85,7 +90,7 @@ p {
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Nunito", sans-serif;
   margin: 0;
   .header-wrapper {
     background-color: @blue_1;
@@ -100,7 +105,8 @@ body {
     overflow: hidden;
     text-align: center;
     padding: 60px 0;
-    background-color: @pink_1;
+    background-color: @grey_2;
+    border-bottom: 4px solid @blue_2;
     h2 {
       margin-top: 0;
     }
@@ -195,13 +201,18 @@ body {
           }
         }
         &:hover,
-        &:focus,
-        &:active {
+        &:focus {
           transform: scale(1.05);
         }
         .product-name {
           font-size: 30px;
           text-align: center;
+          color: white;
+        }
+        .product-price,
+        .product-weight,
+        .product-id {
+          font-size: 18px;
         }
       }
     }

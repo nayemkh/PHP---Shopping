@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Shop</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
     <script data-search-pseudo-elements src="https://kit.fontawesome.com/25ad1fd958.js" crossorigin="anonymous"></script>
 </head>
 
@@ -31,6 +31,7 @@ $product_types = array_unique($product_types_array); // Removing duplicates
 // Search
 
 if (isset($_POST['search'])) {
+    $search = (htmlentities($_POST['search']));
     // Product Type Filter
     if (htmlentities($_POST['product-type'])) {
         $products_array = array_filter($products_array, function ($product) { // Filtering products array
@@ -78,13 +79,13 @@ if (isset($_POST['search'])) {
                 <?php } ?>
             </select>
             <button class="main-button icon search" type="submit">Search</button>
-            <?php if (isset($_POST['search'])) { ?>
+            <?php if (isset($search)) { ?>
                 <button type="submit" name="clear-search" class="main-button icon clear">Clear Search</a>
                 <?php } ?>
         </form>
     </div>
     <div class="main">
-        <?php if (isset($_POST['search']) && htmlentities($_POST['product-type'])) { ?>
+        <?php if (isset($search) && htmlentities($_POST['product-type'])) { ?>
             <div class="active-filters-wrapper">
                 <?php if (htmlentities($_POST['product-type'])) { ?>
                     <h3>Filters:</h3>
@@ -92,7 +93,7 @@ if (isset($_POST['search'])) {
                 <?php } ?>
             </div>
         <?php } ?>
-        <?php if (isset($_POST['search']) && empty($matches) && $_POST['product-type'] == "") { ?>
+        <?php if (isset($search) && empty($matches) && $_POST['product-type'] == "") { ?>
             <div class="status-message">
                 <p>Sorry, your search did not return any matches.</p>
             </div>
@@ -101,19 +102,22 @@ if (isset($_POST['search'])) {
             <h2 class="intro-header">Items</h2>
         </div>
         <div class="product-list">
-            <?php foreach ($products_array as $product) { ?>
-                <a class="product-wrapper <?= strtolower($product['type']); ?>" href="#">
-                    <h2 class="product-name"><?= $product['name']; ?></h2>
-                    <p class="product-price"><strong>Price:</strong> £<?= number_format((float) $product['price'], 2, '.', ''); ?></p>
-                    <p class="product-weight"> <strong>Weight: </strong>
-                        <?php if ($product['weight'] >= 1000) {
+            <?php
+            if (!empty($products_array)) {
+                foreach ($products_array as $product) { ?>
+                    <a class="product-wrapper <?= strtolower($product['type']); ?>" href="#">
+                        <h3 class="product-name"><?= $product['name']; ?></h3>
+                        <p class="product-price"><strong>Price:</strong> £<?= number_format((float) $product['price'], 2, '.', ''); ?></p>
+                        <p class="product-weight"> <strong>Weight: </strong>
+                            <?php if ($product['weight'] >= 1000) {
                                 echo $product['weight'] / 1000 . 'KG';
                             } else {
                                 echo $product['weight'] . 'g';
                             } ?>
-                    </p>
-                    <p class="product-id"><strong>Product ID:</strong> <?= $product['id']; ?></p>
-                </a>
+                        </p>
+                        <p class="product-id"><strong>Product ID:</strong> <?= $product['id']; ?></p>
+                    </a>
+                <?php } ?>
             <?php } ?>
         </div>
     </div>
