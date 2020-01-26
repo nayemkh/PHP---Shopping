@@ -88,7 +88,7 @@ if (isset($_POST['search'])) {
         <?php if (isset($search) && htmlentities($_POST['product-type'])) { ?>
             <div class="active-filters-wrapper">
                 <?php if (htmlentities($_POST['product-type'])) { ?>
-                    <h3>Filters:</h3>
+                    <h2>Active Filters</h2>
                     <span><?= htmlentities($_POST['product-type']) ?></span>
                 <?php } ?>
             </div>
