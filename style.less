@@ -212,11 +212,17 @@ body {
             content: "\f4b8";
           }
         }
+        &.household {
+          &:after {
+            content: "\f015";
+          }
+        }
         &:hover,
         &:focus {
           transform: scale(1.05);
         }
         .product-name {
+          padding: 0 10px;
           font-size: 30px;
           text-align: center;
           color: white;
@@ -226,6 +232,12 @@ body {
         .product-id {
           font-size: 18px;
         }
+      }
+      @media (min-width: 1500px) {
+        grid-template-columns: repeat(5, 1fr);
+      }
+      @media (min-width: 1650px) {
+        grid-template-columns: repeat(6, 1fr);
       }
     }
   }
