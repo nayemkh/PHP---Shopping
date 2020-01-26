@@ -15,18 +15,27 @@ form {
     margin-top: -2px;
     margin-bottom: -2px;
   }
-  .input,
+  input,
   select {
     vertical-align: top;
     display: inline-block;
-    max-width: 250px;
-    height: 50px;
     font-size: 20px;
-    outline: 0;
-    border: 2px solid @blue_1;
-    border-width: 0 0 2px 0;
-    padding: 0;
+    padding: 0 0 0 5px;
     margin-right: 10px;
+    border: 2px solid @grey_border;
+    &::placeholder {
+      color: black;
+    }
+  }
+  input,
+  select,
+  button {
+    font-family: "Nunito", sans-serif;
+    border-radius: 4px;
+    height: 50px;
+  }
+  select {
+    padding-right: 15px;
   }
 }
 
@@ -49,11 +58,11 @@ h2 {
   display: inline-block;
   color: white;
   font-size: 22px;
-  height: 50px;
   border: 2px solid @blue_1;
   background-color: @blue_1;
   transition: all 220ms ease-in-out;
   margin-right: 10px;
+  padding: 0 10px;
   &:hover,
   &:focus,
   &:active {
