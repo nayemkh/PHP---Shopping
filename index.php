@@ -31,9 +31,10 @@ $product_types = array_unique($product_types_array); // Removing duplicates
 // Search
 
 if (isset($_POST['search'])) {
-    $search = (htmlentities($_POST['search']));
+    $search = htmlentities($_POST['search']);
     // Product Type Filter
     if (htmlentities($_POST['product-type'])) {
+        $product_type = htmlentities($_POST['product-type']);
         $products_array = array_filter($products_array, function ($product) { // Filtering products array
             return $product['type'] == htmlentities($_POST['product-type']); // Return products with the same type
         });
@@ -74,8 +75,8 @@ if (isset($_POST['search'])) {
             <select name="product-type">
                 <option value="">Select a product type</option>
                 <?php
-                foreach ($product_types as $product_type) { ?>
-                    <option value="<?= $product_type; ?>" <?php if (isset($_POST['product-type']) && htmlentities($_POST['product-type']) == $product_type) { ?> selected <?php } ?>><?= $product_type; ?></option>
+                foreach ($product_types as $product_type_item) { ?>
+                    <option value="<?= $product_type_item; ?>" <?php if (isset($_POST['product-type']) && htmlentities($_POST['product-type']) == $product_type_item) { ?> selected <?php } ?>><?= $product_type_item; ?></option>
                 <?php } ?>
             </select>
             <button class="main-button icon search" type="submit">Search</button>
@@ -85,18 +86,18 @@ if (isset($_POST['search'])) {
         </form>
     </div>
     <div class="main">
-        <?php if (isset($search) && htmlentities($_POST['product-type']) || isset($search) && htmlentities($_POST['keyword'])) { ?>
+        <?php if (isset($search) && htmlentities($_POST['product-type']) || isset($search) && $keyword) { ?>
             <div class="active-filters-wrapper">
-                <?php if (htmlentities($_POST['product-type'])) { ?>
-                    <h2>Active Filters</h2>
-                    <span><?= htmlentities($_POST['product-type']) ?></span>
+                <h2>Active Filters</h2>
+                <?php if ($product_type) { ?>
+                    <span><?= $product_type; ?></span>
                 <?php } ?>
-                <?php if (htmlentities($_POST['keyword'])) { ?>
-                    <span><?= htmlentities($_POST['keyword']) ?></span>
+                <?php if ($keyword) { ?>
+                    <span><?= $keyword ?></span>
                 <?php } ?>
             </div>
         <?php } ?>
-        <?php if (isset($search) && empty($matches) && $_POST['product-type'] == "") { ?>
+        <?php if (isset($search) && empty($matches) && htmlentities($_POST['product-type']) == "") { ?>
             <div class="status-message">
                 <p>Sorry, your search did not return any matches.</p>
             </div>
