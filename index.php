@@ -89,7 +89,7 @@ if (isset($_POST['search'])) {
         <?php if (isset($search) && htmlentities($_POST['product-type']) || isset($search) && $keyword) { ?>
             <div class="active-filters-wrapper">
                 <h2>Active Filters</h2>
-                <?php if ($product_type) { ?>
+                <?php if (htmlentities($_POST['product-type'])) { ?>
                     <span><?= $product_type; ?></span>
                 <?php } ?>
                 <?php if ($keyword) { ?>
