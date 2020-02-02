@@ -85,11 +85,14 @@ if (isset($_POST['search'])) {
         </form>
     </div>
     <div class="main">
-        <?php if (isset($search) && htmlentities($_POST['product-type'])) { ?>
+        <?php if (isset($search) && htmlentities($_POST['product-type']) || isset($search) && htmlentities($_POST['keyword'])) { ?>
             <div class="active-filters-wrapper">
                 <?php if (htmlentities($_POST['product-type'])) { ?>
                     <h2>Active Filters</h2>
                     <span><?= htmlentities($_POST['product-type']) ?></span>
+                <?php } ?>
+                <?php if (htmlentities($_POST['keyword'])) { ?>
+                    <span><?= htmlentities($_POST['keyword']) ?></span>
                 <?php } ?>
             </div>
         <?php } ?>
