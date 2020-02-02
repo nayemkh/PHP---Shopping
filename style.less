@@ -168,6 +168,7 @@ body {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       .product-wrapper {
+        z-index: 1;
         display: block;
         position: relative;
         background: @blue_1;
@@ -178,7 +179,7 @@ body {
         color: white;
         transition: all 220ms ease-in-out;
         &:after {
-          transition: all 220ms, ease-in-out;
+          transition: all 420ms ease-in-out;
           content: "";
           font-family: "Font Awesome 5 Pro";
           font-weight: 900;
@@ -217,20 +218,42 @@ body {
             content: "\f015";
           }
         }
-        &:hover,
-        &:focus {
-          transform: scale(1.05);
-        }
         .product-name {
           padding: 0 10px;
           font-size: 30px;
           text-align: center;
           color: white;
+          position: relative;
+          &:after {
+            content: "";
+            position: absolute;
+            height: 3px;
+            background-color: white;
+            bottom: -5px;
+            left: 50%;
+            right: 50%;
+            opacity: 0;
+            transition: all 420ms ease-in-out;
+          }
         }
         .product-price,
         .product-weight,
         .product-id {
           font-size: 18px;
+        }
+        &:hover,
+        &:focus {
+          transform: scale(1.05);
+          &:after {
+            transform: rotate(360deg);
+          }
+          .product-name {
+            &:after {
+              left: 25px;
+              right: 25px;
+              opacity: 1;
+            }
+          }
         }
       }
       @media (min-width: 1500px) {
