@@ -10,8 +10,9 @@ if (isset($_POST['clear-search'])) {
 $products_file_contents = file_get_contents("products.json");
 $products_array = json_decode($products_file_contents, true);
 
-// Unique Products Array
+// Isolating fields
 
+$names_array = array_column($products_array, 'name');  // Getting only product names
 $product_types_array = array_column($products_array, 'type'); // Getting only product types
 $product_types = array_unique($product_types_array); // Removing duplicates
 
@@ -31,7 +32,6 @@ if (isset($_POST['search'])) {
     $keyword = (htmlentities($_POST['keyword']));
 
     if ($keyword) {
-        $names_array = array_column($products_array, 'name');  // Getting only product names
         foreach ($names_array as $name) { // Looping through names
             $match = stripos($name, $keyword); // Finding matches
             if (is_numeric($match)) { // if stripos not false
@@ -44,6 +44,37 @@ if (isset($_POST['search'])) {
                     return $product; // Return product
                 }
             });
+        }
+    }
+
+    // Sort
+    if (htmlentities($_POST['sort'])) {
+        $sort = htmlentities($_POST['sort']);
+        switch ($sort) {
+            case "price-high":
+                $sorting_message = "Price: high to low";
+                usort($products_array, function ($a, $b) {
+                    return $a['price'] < $b['price'];
+                });
+                break;
+            case "price-low":
+                $sorting_message = "Price: low to high";
+                usort($products_array, function ($a, $b) {
+                    return $a['price'] > $b['price'];
+                });
+                break;
+            case "weight-high":
+                $sorting_message = "Weight: high to low";
+                usort($products_array, function ($a, $b) {
+                    return $a['weight'] < $b['weight'];
+                });
+                break;
+            case "weight-low":
+                $sorting_message = "Weight: low to high";
+                usort($products_array, function ($a, $b) {
+                    return $a['weight'] > $b['weight'];
+                });
+                break;
         }
     }
 }

@@ -29,6 +29,13 @@
                     <option value="<?= $product_type_item; ?>" <?php if (isset($_POST['product-type']) && htmlentities($_POST['product-type']) == $product_type_item) { ?> selected <?php } ?>><?= $product_type_item; ?></option>
                 <?php } ?>
             </select>
+            <select name="sort">
+                <option value="">Sort by..</option>
+                <option value="price-high" <?php if (isset($_POST['sort']) && htmlentities($_POST['sort']) == "price-high") { ?> selected <?php } ?>>Price: highest to lowest</option>
+                <option value="price-low" <?php if (isset($_POST['sort']) && htmlentities($_POST['sort']) == "price-low") { ?> selected <?php } ?>>Price: lowest to highest</option>
+                <option value="weight-high" <?php if (isset($_POST['sort']) && htmlentities($_POST['sort']) == "weight-high") { ?> selected <?php } ?>>Weight: highest to lowest</option>
+                <option value="weight-low" <?php if (isset($_POST['sort']) && htmlentities($_POST['sort']) == "weight-low") { ?> selected <?php } ?>>Weight: lowest to highest</option>
+            </select>
             <button class="main-button icon search" type="submit">Search</button>
             <?php if (isset($search)) { ?>
                 <button type="submit" name="clear-search" class="main-button icon clear">Clear Search</a>
@@ -36,7 +43,7 @@
         </form>
     </div>
     <div class="main">
-        <?php if (isset($search) && htmlentities($_POST['product-type']) || isset($search) && $keyword) { ?>
+        <?php if (isset($search) && htmlentities($_POST['product-type']) || isset($search) && $keyword || isset($search) && htmlentities($_POST['sort']) ) { ?>
             <div class="active-filters-wrapper">
                 <h2>Active Filters</h2>
                 <?php if (htmlentities($_POST['product-type'])) { ?>
@@ -45,9 +52,12 @@
                 <?php if ($keyword) { ?>
                     <span><?= $keyword ?></span>
                 <?php } ?>
+                <?php if (htmlentities($_POST['sort'])) { ?>
+                    <span><?= $sorting_message; ?></span>
+                <?php } ?>
             </div>
         <?php } ?>
-        <?php if (isset($search) && empty($matches) && htmlentities($_POST['product-type']) == "") { ?>
+        <?php if (isset($search) && empty($matches) && htmlentities($_POST['product-type']) == "" && htmlentities($_POST['sort']) == "") { ?>
             <div class="status-message">
                 <p>Sorry, your search did not return any matches.</p>
             </div>
